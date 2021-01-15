@@ -15,7 +15,7 @@ import HomeRecommend from './homechild/HomeList.vue'
 import HomeContent from './homechild/HomeContent.vue'
 
 //网络请求
-import {getHomeData} from 'server/home.js'
+//import {getHomeData} from 'server/home.js'
 
 export default {
     name: 'Home',
@@ -26,15 +26,6 @@ export default {
     },
     create() {
         //1、请求数据
-        this.getHomeData()
-    },
-    methods: {
-        /* 请求数据的方法 */
-        getHomeData(type) {
-            getHomeData(type).then(res => {
-                console.log(res);
-            })
-        }
     }
 }
 </script>

@@ -8,7 +8,8 @@ module.exports = {
                 'server' : '@/server',
                 'router' : '@/assets',
                 'views' : '@/views',
-                'utils' : '@/utils'
+                'utils' : '@/utils',
+                'store' : '@/store'
             }
         }
     }

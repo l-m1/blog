@@ -6,7 +6,7 @@
         v-model="ObjInput.email"
         type="text"
         :class="{ borred:true }"
-        placeholder="邮箱"
+        placeholder="邮箱地址"
       ></el-input>
       <el-input
         v-model="ObjInput.pas"
@@ -15,15 +15,23 @@
         :class="{ borred:true }"
         placeholder="新密码"
       ></el-input>
-      <el-input
-        v-model="ObjInput.email"
-        type="text"
-        :class="{ borred:true }"
-        placeholder="邮箱验证码"
-      ></el-input>
-      <el-button type="primary" class="submit">获取邮箱验证码</el-button>
+      <div class="input-item">
+          <el-input
+          class="text"
+          v-model="ObjInput.vcode"
+          type="text"
+          style="margin-top:0"
+          :class="{ borred:true }"
+          placeholder="验证码"
+          ></el-input>
+          <div class="code-show">
+            <el-button v-if="!count" type="primary" class="submit" @click="getVcode">获取邮箱验证码</el-button>
+            <el-button v-else type="primary" class="submit">已发送({{count}}s)</el-button>
+          </div>
+        </div>
       <div class="bottom">
-        <el-button type="info" @click="back">返回登录</el-button>
+        <el-button type="info" class="back" @click="back">返回登录</el-button>
+        <el-button type="info" class="reg" @click="register">注册</el-button>
       </div>
     </div>
   </div>
@@ -38,7 +46,8 @@ export default {
                 emailreg: false,
                 pas: ""
             },
-            status: 0
+            status: 0,
+            count: 0
         };
     },
     methods: {
@@ -47,6 +56,18 @@ export default {
       },
       back() {
         this.$router.push('/login')
+      },
+      getVcode() {
+        this.count = 60;
+        this.interval = setInterval(() => {
+          this.count--;
+          if(this.count === 0) {
+            clearInterval(this.interval);
+          }
+        },1000)
+      },
+      register() {
+       console.log('注册完成');
       }
     },
 }
@@ -84,16 +105,41 @@ export default {
     font-weight: 550;
     font-size: 30px;
   }
-  .submit{
-    margin-top: 20px;
+  .input-item {
     width: 100%;
-  } 
+    display: flex;
+    margin: 20px 0;
+    position: relative;
+  }
+  .input-item .text {
+    width: 50%;
+    border-radius: 1px solid #f4f4f4;
+    outline: none;
+    box-sizing: border-box;
+    padding-left: 0 10px;
+  }
+  .code-show {
+    width: 50%;
+    position: relative;
+    padding-left: 20px;
+  }/* 
   .bottom{
     width: 100%;
     margin-top: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+  } */
+
+  .bottom {
+    width: 100%;
+    margin-top: 20px;
+  }
+  .bottom .back {
+    float: left;
+  }
+  .bottom .reg {
+    float: right;
   }
   .el-input {
     margin-top: 20px;

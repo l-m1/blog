@@ -1,10 +1,9 @@
-import {request} from './request.js'
+import {get,post,put,del} from 'utils/request.js'
 
-export function getHomeData(type) {
-    return request({
-        url: '/api/article',
+export function getHomeData() {
+    return get('api/article',{
         params: {
-            type,
+            type: 2
         }
     })
 }
