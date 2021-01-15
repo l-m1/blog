@@ -5,9 +5,10 @@ module.exports = {
                 'assets' : '@/assets',
                 'common' : '@/common',
                 'components' : '@/components',
-                'network' : '@/network',
+                'server' : '@/server',
                 'router' : '@/assets',
-                'views' : '@/views'
+                'views' : '@/views',
+                'utils' : '@/utils'
             }
         }
     }

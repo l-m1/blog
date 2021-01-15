@@ -1,12 +1,20 @@
 <template>
-    <div class="profile">我的</div>
+    <div class="profile">
+        <div><nav-bar></nav-bar></div>
+    </div>
 </template>
 <script>
 
+import NavBar from 'components/content/NavBar.vue'
+
 export default {
-    name: 'Profile'
+    name: 'Profile',
+    components: {
+        NavBar
+    }
 }
 </script>
+
 <style scoped>
     .profile {
         font-size: 15px;

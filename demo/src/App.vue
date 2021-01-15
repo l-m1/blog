@@ -7,15 +7,10 @@
 <script>
 
 export default {
-  name: 'app',
-  components: {
-  }
+  name: 'app'
 }
 </script>
 
 <style>
   @import "~assets/css/base.css";
-  #id {
-    width: 1200px;
-  }
 </style>

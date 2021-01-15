@@ -1,22 +1,26 @@
 <template>
-    <div class="search">
+    <div class="more">
         <div><nav-bar></nav-bar></div>
-        <div class="content">faxaf</div>
+        <div class="content">
+            更多
         </div>
+    </div>
 </template>
 
 <script>
 //导入默认组件 导航栏
 import NavBar from 'components/content/NavBar.vue'
+
 export default {
-    name: 'Search',
+    name: 'More',
     components: {
         NavBar
     }
 }
 </script>
+
 <style scoped>
-    .content {
+    .more {
         top: 70px;
         left: 0;
         position: fixed;
@@ -26,5 +30,8 @@ export default {
         vertical-align: center;
         justify-content: center;
         background-color: red;
+    }
+    .content {
+        width: 750px;
     }
 </style>

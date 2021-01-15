@@ -1,19 +1,40 @@
 <template>
     <div id="home">
-        <home-title></home-title>
+        <nav-bar></nav-bar>
         <home-recommend></home-recommend>
+        <home-content></home-content>
     </div>
 </template>
 <script>
+
+//导入默认组件 导航栏
+import NavBar from 'components/content/NavBar.vue'
+
 //导入homechild里面的子组件
-import HomeTitle from './homechild/HomeTitle.vue'
-import HomeRecommend from './homechild/HomeRecommend.vue'
+import HomeRecommend from './homechild/HomeList.vue'
+import HomeContent from './homechild/HomeContent.vue'
+
+//网络请求
+import {getHomeData} from 'server/home.js'
 
 export default {
     name: 'Home',
     components: {
-        HomeTitle,
-        HomeRecommend
+        NavBar,
+        HomeRecommend,
+        HomeContent
+    },
+    create() {
+        //1、请求数据
+        this.getHomeData()
+    },
+    methods: {
+        /* 请求数据的方法 */
+        getHomeData(type) {
+            getHomeData(type).then(res => {
+                console.log(res);
+            })
+        }
     }
 }
 </script>

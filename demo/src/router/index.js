@@ -5,10 +5,14 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 
-//引入登录之后的各个页面导航
+//导入各个导航页面 
+const Login = () => import('views/login/Login.vue') 
+const Register = () => import('views/register/Register.vue') 
+const ForGet = () => import('views/forget/ForGet.vue') 
+
 const Home = () => import('views/home/Home.vue')
+const Activity = () => import('views/activity/Activity.vue')
 const Search = () => import('views/search/Search.vue')
-const More = () => import('views/more/More.vue')
 const Profile = () => import('views/profile/Profile.vue')
 
 const routes = [
@@ -25,12 +29,24 @@ const routes = [
         component: Search
     },
     {
-        path: '/more',
-        component: More
+        path: '/activity',
+        component:Activity
     },
     {
         path: '/profile',
-        component: Profile
+        component:Profile
+    },
+    {
+        path: '/login',
+        component:Login
+    },
+    {
+        path: '/register',
+        component:Register
+    },
+    {
+        path: '/forget',
+        component:ForGet
     }
 ]
 

@@ -22,7 +22,11 @@ body {
     "微软雅黑",Arial,sans-serif;
     -webkit-tap-highlight-color: transparent;
     background: var(--color-background);
-    width: 100vw;
+    width: 100vw; 
+    
+    /* 设置pc状态的页面视图 */
+    /* width: 50vw;
+    margin: 0 auto; */
 }
 
 a {
