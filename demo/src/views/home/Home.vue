@@ -1,9 +1,8 @@
 <template>
-    <div id="home">
-        <nav-bar></nav-bar>
-        <home-recommend></home-recommend>
-        <home-content></home-content>
-    </div>
+  <div id="home">
+    <nav-bar></nav-bar>
+    <home-list></home-list>
+  </div>
 </template>
 <script>
 
@@ -11,22 +10,15 @@
 import NavBar from 'components/content/NavBar.vue'
 
 //导入homechild里面的子组件
-import HomeRecommend from './homechild/HomeList.vue'
-import HomeContent from './homechild/HomeContent.vue'
+import HomeList from './homechild/HomeList.vue'
 
-//网络请求
-//import {getHomeData} from 'server/home.js'
 
 export default {
-    name: 'Home',
-    components: {
-        NavBar,
-        HomeRecommend,
-        HomeContent
-    },
-    create() {
-        //1、请求数据
-    }
+  name: 'Home',
+  components: {
+    NavBar,
+    HomeList
+  }
 }
 </script>
 <style scoped>

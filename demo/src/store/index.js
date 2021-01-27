@@ -7,18 +7,18 @@ Vue.use(Vuex)
 import mutation from './mutations.js'
 
 const state = {
-    data() {
-        return {
-            token
-        }
+  data() {
+    return {
+      token
     }
+  }
 }
 
 const store = Vuex.Store({
-    state,
-    mutation,
-    active,
-    getters,
+  state,
+  mutation,
+  active,
+  getters,
 })
 
 export default store

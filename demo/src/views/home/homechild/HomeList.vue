@@ -1,57 +1,72 @@
 <template>
-    <div class="item-list">
-        <div class="content">
-            <ul class="nav">
-                <li class="item" v-for="(item,index) in items" :key="index"
-                    :class="{active: currentIndex === index}"
-                    @click="recClick(index)"
-                >{{item}}</li>
-            </ul>
-        </div>
+  <div class="post-page clearfix">
+    <div class="float-left">
+      <div v-for="(item,key) in navs" :key="key" class="left-navs">
+        <el-button
+          @click="subscript=key"
+          :type="subscript === key ?'primary':''"
+          style="width:100%"
+        >{{item}}</el-button>
+      </div>
     </div>
+    <div class="float-right">
+      <div class="float-right-item" v-for="(value,index) in 5" :key="index+'xue2'">
+        <el-card class="box-card">
+          <div slot="header" class="clearfix">
+            <span>卡片名称</span>
+            <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
+          </div>
+          <div v-for="o in 4" :key="o" class="text item">{{'列表内容 ' + o }}</div>
+        </el-card>
+      </div>
+    </div>
+  </div>
 </template>
+
 <script>
 export default {
-    name: 'HomeList',
-    data() {
-        return {
-            currentIndex: 0,
-            items: ['全部文章','Javascript','Html','CSS','Vue','更多']
-        }
-    },
-    methods: {
-        recClick(index) {
-            this.currentIndex = index
-            this.$emit('recClick',index)
-        }
-    }
-}
-</script>
-<style scoped>
-    .item-list {
-        top: 65px;
-        left: 0;
-        position: fixed;
-        width: 100%;
-        background: #ffffff;
-        height: 40px;
-    }
-    .nav{
-        list-style: none;
-        /* 水平垂直居中 */
-        display: flex;
-        vertical-align: center;
-        justify-content: center;
-        
-    }
-    .nav .item {
-        display: inline-block;
-        height: 30px;
-        line-height: 30px;
-        padding: 0 10px;
-        font-size: 12px;
-    }
-    .active {
-        color: red;
-    }
+  name: "HomeList",
+  data() {
+    let navs = ['热点文章','Html','CSS','Javascript','Vue','更多'];
+    return {
+      navs,
+      subscript:0, //默认为第一个nav
+    };
+  }
+};
+</script> 
+
+<style lang='less' scoped>
+  .post-page{
+    top: 70px;
+    left: 0;
+    position: fixed;
+    width: 100%;
+    /* 水平垂直居中 */
+    display: flex;
+    vertical-align: center;
+    justify-content: center;
+  }
+  .float-left {
+    float: left;
+    overflow: hidden;
+    width: 200px;
+    background-color: #fff;
+  }
+  .left-navs{
+    width: 80%;
+    margin:10px auto;
+  }
+  .left-navs button{
+    border:1px solid #fff
+  }
+  .float-right {
+    float: left;
+    overflow: hidden;
+    width: 710px;
+  }
+  .float-right-item{
+    width: 100%;
+    margin-bottom: 15px;
+  }
 </style>

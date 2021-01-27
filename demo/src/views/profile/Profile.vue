@@ -1,23 +1,22 @@
 <template>
-    <div class="profile">
-        <div><nav-bar></nav-bar></div>
-    </div>
+  <div class="profile">
+    <nav-bar></nav-bar>
+    <profile-list></profile-list>
+  </div>
 </template>
 <script>
 
 import NavBar from 'components/content/NavBar.vue'
+import ProfileList from './profilechild/ProfileList.vue'
 
 export default {
-    name: 'Profile',
-    components: {
-        NavBar
-    }
+  name: 'Profile',
+  components: {
+    NavBar,
+    ProfileList
+  }
 }
 </script>
 
 <style scoped>
-    .profile {
-        font-size: 15px;
-        color: red;
-    }
 </style>
