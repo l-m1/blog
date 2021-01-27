@@ -58,6 +58,7 @@ export default {
             Storage.setStorage('token',userInfo.data.token);
             this.$router.push('/profile');
           }
+          console.log(userInfo);
       }
     },
     //下方按钮选择 跳转至注册 or 忘记密码
@@ -91,8 +92,5 @@ export default {
 </script>
 
 <style lang='less'>
-.el-input {
-  margin-top: 20px;
-}
-@import "./index.less";
+@import url('~assets/css/login.css');
 </style>

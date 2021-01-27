@@ -37,36 +37,5 @@ export default {
 </script> 
 
 <style lang='less' scoped>
-  .post-page{
-    top: 70px;
-    left: 0;
-    position: fixed;
-    width: 100%;
-    /* 水平垂直居中 */
-    display: flex;
-    vertical-align: center;
-    justify-content: center;
-  }
-  .float-left {
-    float: left;
-    overflow: hidden;
-    width: 200px;
-    background-color: #fff;
-  }
-  .left-navs{
-    width: 80%;
-    margin:10px auto;
-  }
-  .left-navs button{
-    border:1px solid #fff
-  }
-  .float-right {
-    float: left;
-    overflow: hidden;
-    width: 710px;
-  }
-  .float-right-item{
-    width: 100%;
-    margin-bottom: 15px;
-  }
+  @import url('~assets/css/home/homelist.css');
 </style>

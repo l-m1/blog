@@ -1,0 +1,53 @@
+.search-list {
+  top: 70px;
+  left: 0;
+  position: fixed;
+  width: 100%;
+  /* 水平垂直居中 */
+  display: flex;
+  vertical-align: center;
+  justify-content: center;
+}
+.page {
+  width: 920px;
+}
+.page .el-scrollbar{
+  height: 100vh;
+}
+.page .el-scrollbar_wrap {
+  overflow: hidden;
+  width: 110%;
+  height: 120%;
+}
+.activity-box{
+  width: 420px;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 10px; 
+  float: left;
+}
+.des-box{
+  width: 100%;
+}
+.title{
+  text-align:left ;
+  color: #333333;
+}
+.des{
+  text-align: left;
+  color: #666666;
+  font-size: 14px;
+  line-height: 25px;
+}
+.bottom {
+  margin-top: 13px;
+  line-height: 30px;
+}
+.button {
+  padding: 0;
+  float: right;
+}
+.image {
+  width: 100%;
+  display: block;
+}

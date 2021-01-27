@@ -2,7 +2,7 @@ import Axios from 'axios';
 import Storage from 'utils/storage.js';
 import router from 'router/index.js';
 const instance = Axios.create({
-	baseURL: 'http://api.cat-shop.penkuoer.com',
+	baseURL: 'http://127.0.0.1:3001',
 	timeout: 3000,
 	withCredentials:true ,//是否允许带cookie这些
   });
@@ -25,6 +25,8 @@ instance.interceptors.response.use(function (response) {
     // 对响应错误做点什么
     return Promise.reject(error);
   });
+
+export default instance
 class Api{
 	constructor() {
 	}

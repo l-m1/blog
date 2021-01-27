@@ -9,7 +9,7 @@ let router = new Router({
   linkActiveClass:'selected',
   linkExactActiveClass: 'normal',
   scrollBehavior(to,from,savePosition) {//滚动行为
-    console.log(savePosition)
+    //console.log(savePosition)
     if(savePosition) {
       return savePosition
     } else {

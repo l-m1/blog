@@ -39,34 +39,5 @@ export default {
 }
 </script>
 <style scoped>
-  .activity-list {
-    top: 70px;
-    left: 0;
-    position: fixed;
-    width: 100%;
-    /* 水平垂直居中 */
-    display: flex;
-    vertical-align: center;
-    justify-content: center;
-  }
-  .page {
-    width: 920px;
-  }
-  .activity-list .page-head{
-    text-align: center;
-    width: 100%;
-    font-size: 18px;
-    color: var(--color-text);
-  }
-  .activity-box{
-    width: 420px;
-    padding: 10px;
-    border-radius: 10px;
-    margin: 10px; 
-    float: left;
-  }
-  .image {
-    width: 100%;
-    display: block;
-  }
+  @import url('~assets/css/activity/activitylist.css');
 </style>

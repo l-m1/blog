@@ -1,4 +1,4 @@
-import {GET,PUT,DELETE,POST} from './request.js'
+import {GET,PUT,DELETE,POST} from 'utils/request.js'
 
 //注册
 export function register({data}) {

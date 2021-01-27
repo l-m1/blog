@@ -145,8 +145,5 @@ export default {
 </script>
 
 <style lang='less'>
-.el-input {
-  margin-top: 20px;
-}
-@import "./index.less";
+@import url('~assets/css/forget.css');
 </style>
