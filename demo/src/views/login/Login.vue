@@ -1,65 +1,71 @@
 <template>
-  <div class="page">
-    <div class="input-box">
-      <div class="title">登录</div>
-      <el-input
-        v-model="ObjInput.email"
-        type="text"
-        :class="{ borred:true }"
-        placeholder="请输入您的邮箱"
-      ></el-input>
-      <el-input
-        v-model="ObjInput.pas"
-        show-password
-        type="password"
-        :class="{ borred:true }"
-        placeholder="密码"
-      ></el-input>
-      <el-button type="primary" @click="submit" class="register">登录</el-button>
-      <div class="bottom">
-        <el-button type="info" @click="switchModel(1)">注册</el-button>
-        <el-button type="info" @click="switchModel(2)">忘记密码</el-button>
+  <div class="login_container">
+    <div class="login_box">
+      <!-- 头部区域 -->
+      <div class="avatar_box">
+        <span>登录</span>
       </div>
+      <!-- 登录区域 -->
+      <el-form ref="loginform" class="loginform" :model="loginForm" :rules="loginRules">
+        <!-- 用户名 -->
+        <el-form-item prop="codename">
+          <el-input v-model="loginForm.codename" prefix-icon="iconfont iconyouxiang"></el-input>
+        </el-form-item>
+        <!-- 密码 -->
+        <el-form-item prop="password">
+          <el-input v-model="loginForm.password" prefix-icon="iconfont iconpass" type="password"></el-input>
+        </el-form-item>
+        <!-- 按钮区域 -->
+        <el-form-item class="btns">
+          <el-button type="primary" @click="submit" class="login">登录</el-button>
+          <div class="bottom">
+            <el-button type="info" @click="switchModel(1)">注册</el-button>
+            <el-button type="info" @click="switchModel(2)">重置密码</el-button>
+          </div>
+        </el-form-item>
+      </el-form>
     </div>
   </div>
 </template>
 <script>
 /* 邮箱正则 */
 import RegExp from "utils/RegExp.js";
-/* 对数据进行初始设置 */
-import Storage from 'utils/storage.js';
+import Storage from "utils/storage.js";
+/* 网络请求 */
+import {login} from 'server/userApi.js';
 
 export default {
+  name: 'Login',
   data() {
     return {
-      ObjInput: {
-        email: "",
-        emailreg: false,  //邮箱验证码
-        pas: "",
+      loginForm: {
+        codename: "2456717908@qq.com",
+        password: "m111111"
       },
-      status: 0,
-    };
+      /* 登录规则 */
+      loginRules: {
+        codename: [
+          { required: true,message: "请输入邮箱",trigger: "blur"}
+        ],
+        password: [
+          { required: true,message: "请输入登录密码",trigger: "blur"}
+        ]
+      },
+    }
   },
   methods: {
     async submit() {
-      //点击登录按钮
-      //1、邮箱\密码 不符合规范
-      if(!RegExp.emailRight.test(this.ObjInput.email) | !RegExp.regPassWord.test(this.ObjInput.pas)) {
-        this.$message({
-          message: '请确认您输入的邮箱、密码是否正确',
-          type: 'warning'
-        })
-        return;
-      } else {
-          //符合规范的 邮箱与密码对应
-          //登录成功 保存登录信息
-          let userInfo = await this.$api.login({data:{title:1111,des:'55555'}})
-          if(userInfo.ok === 1) {
-            Storage.setStorage('token',userInfo.data.token);
-            this.$router.push('/profile');
-          }
-          console.log(userInfo);
-      }
+        let res = await login({data:{name: this.loginForm.codename,psd: this.loginForm.password}})
+        //console.log(res);
+        if(res.id >= 0) {
+          //console.log(res);
+          //将token保存
+          window.sessionStorage.setItem('token',res.token);
+          //跳转路由
+          this.$router.push('/home');
+        }else {
+        this.$message.error('请确认您的邮箱、密码是否正确');
+        }
     },
     //下方按钮选择 跳转至注册 or 忘记密码
     switchModel(event) {
@@ -72,25 +78,47 @@ export default {
           break;
       }
     },
-  },
-  //监听data中数据变化
-  watch: {
-    ObjInput: {
-      // 数据变化时执行的逻辑代码
-      handler(newData, oldData) {
-        if (RegExp.emailRight.test(this.ObjInput.email)) {  //符合邮箱正则
-          this.ObjInput.emailreg = true;
-        } else {
-          this.ObjInput.emailreg = false;
-        }
-      },
-      deep: true,  //深度监听
-    },
-  },
-  
-};
+  }
+}
 </script>
-
-<style lang='less'>
-@import url('~assets/css/login.css');
+<style lang="less" scoped>
+  .login_container {
+    background-color: #f5f7fa;
+    height: 100vh;
+  }
+  .login_box {
+    width: 450px;
+    height: 360px;
+    background-color: #fff;
+    border-radius: 3px;
+    /* 外部白色盒子居中 */
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    .avatar_box {
+      font-size: 30px;
+      margin: 20px 0;
+      font-weight: 550;
+      color: #333333;
+      text-align: center;
+    }
+  }
+  .login_box .loginform {
+    position: absolute;
+    bottom: 30px;
+    width: 100%;
+    padding: 0 15px;
+    box-sizing: border-box;
+  }
+  .btns .login{
+    width: 100%;
+  }
+  .btns .bottom {
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 </style>

@@ -39,7 +39,7 @@ router.afterEach((to, from) => {
     window.document.title = to.meta.title;
     console.log(from)
   } else {
-      window.document.title = '笔记库'
+      window.document.title = 'blog'
     }
 })
 

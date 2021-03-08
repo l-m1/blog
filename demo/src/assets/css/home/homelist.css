@@ -7,12 +7,18 @@
   display: flex;
   vertical-align: center;
   justify-content: center;
+  height:100vh
 }
 .float-left {
   float: left;
   overflow: hidden;
   width: 200px;
   background-color: #fff;
+}
+.post-page .el-scrollbar_wrap {
+  overflow: hidden;
+  width: 110%;
+  height: 120%;
 }
 .left-navs{
   width: 80%;
@@ -22,6 +28,7 @@
   border:1px solid #fff
 }
 .float-right {
+  padding-left: 6px;
   float: left;
   overflow: hidden;
   width: 710px;

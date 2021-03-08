@@ -1,21 +1,27 @@
 //导入登录页面 
 const Login = () => import('views/login/Login.vue') 
 const Register = () => import('views/register/Register.vue') 
-const ForGet = () => import('views/forget/ForGet.vue') 
+const Forget = () => import('views/forget/Forget.vue') 
 
 //导入各个导航页面
 const Home = () => import('views/home/Home.vue')
 const Activity = () => import('views/activity/Activity.vue')
 const Search = () => import('views/search/Search.vue')
 const Profile = () => import('views/profile/Profile.vue')
+
+const HomeListItem = () => import('components/content/HomeListItem.vue')
 export const routes = [
   {
     path: '',
-    redirect: '/home'
+    redirect: '/login'
   },
   {
     path: '/home',
-    component: Home
+    component: Home,
+  },
+  {
+    path: '/homelistitem',
+    component:HomeListItem
   },
   {
     path: '/search',
@@ -42,6 +48,6 @@ export const routes = [
   },
   {
     path: '/forget',
-    component:ForGet
+    component:Forget
   }
 ]

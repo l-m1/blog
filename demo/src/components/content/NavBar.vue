@@ -12,7 +12,7 @@
         ></a>
         </li>
         <div>
-          <el-button @click="submit">登录</el-button>
+          <el-button @click="backLogin">退出登录界面</el-button>
         </div>
       </ul>
     </div>
@@ -33,7 +33,7 @@ export default {
     }
   },
   methods: {
-    submit() {
+    backLogin() {
       this.$router.push('/login')
     }
   }

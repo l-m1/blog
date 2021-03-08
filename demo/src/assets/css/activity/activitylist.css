@@ -10,6 +10,12 @@
 }
 .page {
   width: 920px;
+  height: 100vh;
+}
+.page .el-scrollbar_wrap {
+  overflow: hidden;
+  width: 110%;
+  height: 120%;
 }
 .activity-list .page-head{
   text-align: center;

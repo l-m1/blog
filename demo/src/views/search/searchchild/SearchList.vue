@@ -3,15 +3,15 @@
     <div class="page">
       <el-scrollbar>
         <el-row>
-        <el-col :span="8" v-for="(item,index) in 10" :key="index" class="activity-box">
+        <el-col :span="8" v-for="(item,index) in options" :key="index" class="activity-box">
           <el-card :body-style="{padding: '0px'}" shadow="hover">
             <img
-              src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+              src="~assets/img/activity/book.jpg"
               class="image"
             />
             <div style="padding: 14px;">
               <div class="des-box">
-                <h3 class="title">机器学习</h3>
+                <h3 class="title">{{item.title}}</h3>
                 <div class="des">vue是上手最快的前端框架！</div>
               </div>
               <div class="bottom clearfix">
@@ -30,7 +30,35 @@
 </template>
 <script>
 export default {
-  name: 'SearchList'
+  name: 'SearchList',
+  data() {
+    return {
+      options: {}
+    }
+  },
+  methods: {
+    //选择框
+    itemClick() {
+      console.log(this.options);
+      //this.getArticles()
+      
+    },
+
+
+
+    /* 网络请求数据的方法 */
+    //全部文章
+    async getArticles() {
+      let res = await getAllArticle({params:{type:this.type[this.options]}})
+      this.options = res
+      console.log(res);
+    },
+    //查看单个文章
+    async lookarticle(id) {
+      let res = await oneArticle({params: {id: id}})
+      //console.log(res);
+    },
+  }
 }
 </script>
 <style scope>
