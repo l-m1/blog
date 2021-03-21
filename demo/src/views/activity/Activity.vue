@@ -7,7 +7,7 @@
 
 <script>
 //导入默认组件 导航栏
-import NavBar from 'components/content/NavBar.vue'
+import NavBar from 'components/common/NavBar.vue'
 //导入子组件
 import ActivityList from './activitychild/ActivityList.vue'
 

@@ -18,7 +18,8 @@
         <!-- 邮箱验证码 -->
         <el-form-item prop="vcode" class="code">
           <el-input v-model="loginForm.vcode" prefix-icon="iconfont iconyanzhengma" class="vcode"></el-input>
-          <el-button @click="send" class="vcode-button">获取邮箱验证码</el-button>
+          <el-button @click="send" class="vcode-button" v-show="isshow">获取邮箱验证码</el-button>
+          <el-button v-show="!isshow">{{count}}s后重新获取</el-button>
         </el-form-item>
         <!-- 按钮区域 -->
         <el-form-item class="btns">
@@ -42,6 +43,10 @@ export default {
   name: 'Forget',
   data() {
     return {
+      /* 验证码倒计时 */
+      count:'',
+      isshow:true,
+      timer:null,
       loginForm: {
         codename: '',
         password: '',
@@ -55,7 +60,7 @@ export default {
         password: [
           { required: true,message: "请输入新密码",trigger: "blur"}
         ],
-        emailvcode: [
+        vcode: [
           { required: true,message: "请输入邮箱验证码",trigger: "blur"}
         ]
       },
@@ -81,20 +86,48 @@ export default {
           //密码重置请求
           let res = await repassword({data:{name: this.loginForm.codename,psd: this.loginForm.password,code:this.loginForm.vcode}})
           //console.log(res);
-          this.$message({
-            message: '重置密码成功',
-            type: 'success'
-          })
+          if(res == "验证码错误！") {
+            this.$message({
+              message: '您输入的验证码不正确，请重新输入',
+              type: 'error'
+            })
+          } else {
+            this.$message({
+              message: '重置密码成功',
+              type: 'success'
+            })
+          }
       }
     },
     async send() {
     //获取验证码
+    const Time_COUNT = 60
     let res = await getVcode({params:{email:this.loginForm.codename}})
     //console.log(res);
-    this.$message({
-        message: '发送验证码成功',
-        type: 'success'
-    })
+      if(!RegExp.emailRight.test(this.loginForm.codename) | !RegExp.regPassWord.test(this.loginForm.password)) {
+        this.$message({
+          message: '请确认您是否输入邮箱和密码',
+          type: 'warning'
+        })
+        return;
+      } else if (!this.timer) {
+        this.count = Time_COUNT
+        this.isshow = false
+        this.$message({
+          message: '发送验证码成功',
+          type: 'success'
+        })
+        this.timer = setInterval(() => {
+          if(this.count>0 && this.count <= Time_COUNT) {
+            this.count--
+            this.isshow = false
+          }else {
+            this.isshow = true
+            clearInterval(this.timer)
+            this.timer = null
+          }
+          },1000)
+      }
     },
     //下方按钮选择 跳转至注册 or 忘记密码
     switchModel(event) {

@@ -40,7 +40,7 @@ export default {
     return {
       loginForm: {
         codename: "2456717908@qq.com",
-        password: "m111111"
+        password: "abc123"
       },
       /* 登录规则 */
       loginRules: {
@@ -57,14 +57,17 @@ export default {
     async submit() {
         let res = await login({data:{name: this.loginForm.codename,psd: this.loginForm.password}})
         //console.log(res);
-        if(res.id >= 0) {
-          //console.log(res);
+        if(res === "查无此人") {
+          this.$message({
+          message: '请确认您输入的邮箱、密码是否正确',
+          type: 'warning'
+        })
+          return;
+        }else {
           //将token保存
           window.sessionStorage.setItem('token',res.token);
           //跳转路由
           this.$router.push('/home');
-        }else {
-        this.$message.error('请确认您的邮箱、密码是否正确');
         }
     },
     //下方按钮选择 跳转至注册 or 忘记密码

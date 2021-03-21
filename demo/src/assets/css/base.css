@@ -4,7 +4,7 @@
     --color-text: #666;
     --color-high-text: #ff5777;
     --color-tint: #ff8198;
-    --color-background: #f4f5f5;
+    --theme_bg_color: #f4f5f5;
     --font-size: 14px;
     --line-height: 1.5;
 }
@@ -21,7 +21,7 @@ body {
     font-family: "Helvegtica Neue",Helvetica,"PingFang SC" ,"Hiragino Sans GB","Microsoft YaHei"
     "微软雅黑",Arial,sans-serif;
     -webkit-tap-highlight-color: transparent;
-    background: var(--color-background);
+    background: var(--theme_bg_color);
     width: 100vw; 
     
     /* 设置pc状态的页面视图 */

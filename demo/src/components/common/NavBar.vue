@@ -1,8 +1,8 @@
 <template>
-  <div class="nav-bar">
+  <div class="nav-bar-item">
     <div class="content">
       <ul class="nav">
-        <li><img src="~assets/img/home/navbar/title.png" alt=""><p>个人博客</p></li>
+        <li><img src="~assets/img/home/navbar/title.png" alt=""><p>博客网</p></li>
         <li class="item" v-for="(item,key) in titles" :key="key">
         <a
           :class="{'active':($route.path == item.p) || (item.p =='/home' && $route.path == '/') }"
@@ -11,8 +11,11 @@
           v-text="item.t"
         ></a>
         </li>
-        <div>
-          <el-button @click="backLogin">退出登录界面</el-button>
+        <div class="change">
+          <el-button @click="changeColor" size="mini">一键换肤</el-button>
+        </div>
+        <div class="back">
+          <el-button @click="backLogin" size="mini">退出登录界面</el-button>
         </div>
       </ul>
     </div>
@@ -24,15 +27,24 @@ export default {
   data() {
     const titles = [
       { p: "/home", t: "首页" },
-      { p: "/activity", t: "活动" },
+      { p: "/activity", t: "沸点" },
       { p: "/search", t: "发现" },
       { p: "/profile", t: "我的" },
     ];
     return {
       titles,
+      isshow:false
     }
   },
   methods: {
+    changeColor() {
+      this.isshow = !this.isshow
+      if(this.isshow) {
+        document.documentElement.style.setProperty("--theme_bg_color","#99CC99")
+      }else {
+        document.documentElement.style.setProperty("--theme_bg_color",'#f4f5f5')
+      }
+    },
     backLogin() {
       this.$router.push('/login')
     }
@@ -80,7 +92,12 @@ export default {
   .active {
     color: #409eff;
   }
-  .el-button {
+  .change .el-button {
+    margin-right: 15px;
+    margin-top: 18px;
+  }
+  .back .el-button {
+    margin-top: 18px;
     background-color: #007fff;
     color: #ffffff;
   }

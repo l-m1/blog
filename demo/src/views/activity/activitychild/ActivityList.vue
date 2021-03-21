@@ -1,76 +1,80 @@
 <template>
-  <div class="activity-list">
-    <div class="page">
-      <div class="page-head">
-        选择文章类别：
-        <el-select v-model="selected" @change="itemClick" placeholder="请选择">
-          <el-option
-            v-for="item in options"
-            :key='item.label'
-            :label="item.value"
-            :value="item.label"
-          ></el-option>
-        </el-select>
+  <div class="post-page clearfix">
+    <!-- 左侧菜单栏 -->
+    <div class="float-left">
+      <div v-for="(item,key) in navs" :key="key" class="left-navs">
+        <el-button
+          @click="itemClick(subscript=key)"
+          :type="subscript === key ?'primary':''"
+          style="width:100%"
+        >{{item}}</el-button>
       </div>
-      <el-scrollbar>
-        <el-row>
-          <el-col :span="8" v-for="(item,index) in articlelist" :key="index" class="activity-box">
-            <el-card :body-style="{ padding: '0px' }">
-              <img src="~assets/img/activity/book.jpg" class="image">
-              <div style="padding: 14px;">
-                <span>标题：{{item.title}}</span>
-                <div class="bottom clearfix">
-                  <time class="time">{{item.updata_at}}</time>
-                  <el-button type="text" class="button" @click="lookarticle(id)">查看</el-button>
-                </div>
-              </div>
-            </el-card>
-          </el-col>
-        </el-row>
-      </el-scrollbar>
     </div>
+    <!-- 中间内容区 -->
+    <el-scrollbar>
+      <div class="float-right">
+        <el-card class="box-card" v-for="(item,index) in articlelist" :key="index">
+          <div slot="header" class="clearfix">
+            <span>标题：{{item.title}}</span>
+            <!-- 详情按钮 -->
+            <el-tooltip effect="dark" content="详情" placement="top" :enterabl="false">
+            <el-button style="float: right" type="primary" icon="iconfont iconchakan" size="mini" @click="articleLook(item)"></el-button>
+            </el-tooltip>
+          </div>
+          <div class="text item">更新时间：{{item.updata_at}}</div>
+        </el-card>
+      </div>
+    </el-scrollbar>
   </div>
 </template>
+
 <script>
-import books from 'utils/books.js'
+//网络请求
 import {getAllArticle,oneArticle} from 'server/userApi.js'
+
 export default {
-  name: 'ActivityList',
+  name: "ActivityList",
+  created() {
+    this.getAllArticles()
+  },
   data() {
-    let add_ = JSON.parse(JSON.stringify(books));
+    let navs =  ["推荐", "热门", "面试", "上班摸鱼", "内推招聘","学习书籍"];
     return {
-      options: add_,
-      selected: "10",
+      navs,
+      subscript:0, //默认为第一个nav
+      type: ['推荐','其它','面试','摸鱼','内推','书籍'],
       articlelist: {},
-      /* 网络请求都数据 */
-      type: ['热点文章','html','css','js','vue',''],
+      isshow: false
     };
   },
   methods: {
-    //选择框
+    //点击左侧列表
     itemClick() {
-      this.getArticles()
-      //console.log(this.options);
+      //console.log(this.subscript);
+      this.getAllArticles()
       
     },
-
-
-
-    /* 网络请求数据的方法 */
-    //全部文章
-    async getArticles() {
-      let res = await getAllArticle({params:{type:this.type[this.subscript]}})
-      this.articlelist = res
-      console.log(res);
+    /* 查看文章内容 */
+    articleLook(item) {
+      this.lookArticle(item.id)
+      this.$router.push({path:'/lookArticles',query:{id:item.id,res:item}})
     },
-    //查看单个文章
-    async lookarticle(id) {
-      let res = await oneArticle({params: {id: id}})
+    /* 网络请求 */
+    //获取对应项文章列表
+    async getAllArticles() {
+      let res = await getAllArticle({params:{type:this.type[this.subscript]}})
+      //console.log(res);
+      this.articlelist = res
+    },
+    /* 查看单个文章内容 */
+    async lookArticle(item) {
+      let res = await oneArticle({params: {id: item.id,type:this.type[this.subscript]}})
       //console.log(res);
     },
   }
-}
-</script>
-<style scoped>
+};
+</script> 
+
+<style lang='less' scoped>
   @import url('~assets/css/activity/activitylist.css');
 </style>

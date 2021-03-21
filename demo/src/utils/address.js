@@ -1,0 +1,11 @@
+export default [{value: "北京市", label: "1"},
+{value: "河北省", label: "2"},
+ {value: "山西省", label: "3"},
+{value: "上海市", label: "4"},
+ {value: "江苏省", label: "5"},
+ {value: "浙江省", label: "6"},
+ {value: "海南省", label: "7"},
+{value: "重庆市", label: "8"},
+ {value: "四川省", label: "9"},
+ {value: "云南省", label: "10"},
+ {value: "安徽省", label: "11"},]

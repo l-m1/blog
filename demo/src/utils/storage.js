@@ -42,7 +42,7 @@ export default {
             }
             return;
         }
-        console.log(key, value)
+        //console.log(key, value)
         localStorage.setItem(key, JSON.stringify({
             data: value,
             time: curTime

@@ -1,15 +1,15 @@
 <template>
-  <div id="home">
-    <nav-bar></nav-bar>
+  <div class="post-page">
     <home-list></home-list>
+    <nav-bar></nav-bar>
   </div>
 </template>
 <script>
 
 //导入默认组件 导航栏
-import NavBar from 'components/content/NavBar.vue'
+import NavBar from 'components/common/NavBar.vue'
 
-//导入homechild里面的子组件
+//导入子组件
 import HomeList from './homechild/HomeList.vue'
 
 
@@ -22,4 +22,15 @@ export default {
 }
 </script>
 <style scoped>
+  .post-page{
+    top: 110px;
+    left: 0;
+    position: fixed;
+    width: 100%;
+    /* 水平垂直居中 */
+    display: flex;
+    vertical-align: center;
+    justify-content: center;
+    height:100vh
+  }
 </style>
